@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "==18.9b0"
+ipdb = "==0.11"
+isort = "==4.3.4"
+flake8 = "==3.6.0"
+inotify = "==0.2.10"
+pytest = "==4.0.1"
+pytest-cov = "==2.6.1"
+pytest-django = "==3.4.5"
+django-test-without-migrations = "*"
+model-mommy = "*"
+
+[packages]
+django = "*"
+python-decouple = "*"
+djangorestframework = "*"
+dj-database-url = "==0.5.0"
+dj-static = "*"
+django-storages = "*"
+pillow = "*"
+boto3 = "*"
+gunicorn = "*"
+python-json-logger = "*"
+attrs = "==19.1.0"
+
+[requires]
+python_version = "3.7"
