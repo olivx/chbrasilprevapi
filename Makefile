@@ -20,6 +20,12 @@ lint:
 test: clean lint
 	python -m pytest --cov=core --cov=account
 
+down:
+	docker-compose down
+
+compose:
+	docker-compose up --build
+
 build:
 	docker build -t brasilprev . 
 

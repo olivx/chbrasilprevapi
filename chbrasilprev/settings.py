@@ -89,8 +89,9 @@ WSGI_APPLICATION = 'chbrasilprev.wsgi.application'
 default_url = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': config('DATABASE_URL', default=default_url, cast=dburl),
-
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
