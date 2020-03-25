@@ -10,24 +10,25 @@ ENV SECRET_KEY="eb*xnd%dbcj*u0q^y75s!mz9)87(_i@vz&i@w4r-pc3rp1duf1"
 ENV FILENAME_LOG_GUNICORN="/var/log/app/gunicorn.log"
 ENV FILENAME_LOG_APP="/var/log/app/app.log"
 
-WORKDIR /app
+WORKDIR app
 
-COPY Pipfile* /app/
+COPY Pipfile* ./
 
 RUN pip install --upgrade pip
 
 RUN pip install pipenv && \
     pipenv install --system --deploy
 
-RUN groupadd -g 999 appuser && \
-    useradd -r -u 999 -g appuser appuser
 
-RUN mkdir /var/log/app && chown appuser /var/log/app
+RUN mkdir /var/log/app
+
+COPY . /app/entrypoint.sh
+
+RUN chmod +x /app/entrypoint.sh
 
 COPY . /app
 
-USER appuser
 
 EXPOSE 8000
-
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "chbrasilprev.wsgi:application"]
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]
+# CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "chbrasilprev.wsgi:application"]

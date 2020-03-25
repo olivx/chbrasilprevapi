@@ -1,8 +1,5 @@
 SHELL := /bin/sh
 
-doc:
-	snowboard html -o docs/core.html docs/core.coreb
-	vanadia --input docs/.core --output docs/core.postman_collection.json
 
 clean:
 	@rm -f .coverage 2> /dev/null
@@ -23,5 +20,13 @@ lint:
 test: clean lint
 	python -m pytest --cov=core --cov=account
 
-dump_data:
-	python manage.py load_data --all  
+build:
+	docker build -t brasilprev . 
+
+run:
+	docker container run  \
+	-e DEBUG="True" \
+	-e LOG_LEVEL="INFO" \
+	-e ALLOWED_HOSTS="127.0.0.1, .localhost, *" \
+	-e SECRET_KEY="eb*xnd%dbcj*u0q^y75s!mz9)87(_i@vz&i@w4r-pc3rp1duf1" \
+	-p 8000:8000 --rm --name container_brasilprev brasilprev
