@@ -30,7 +30,6 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email=None, password=None, **extra_fields):
         """ create aregular user """
-        extra_fields.setdefault("is_active", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
@@ -66,12 +65,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = "Cliente"
         verbose_name_plural = "Cliente"
 
+
     @property
     def is_staff(self):
         return self.is_admin
 
     def __str__(self):
         return self.get_full_name()
+
+    def get_full_name(self):
+        return self.nome
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Sends an email to this User."""
