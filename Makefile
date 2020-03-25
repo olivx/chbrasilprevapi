@@ -1,7 +1,13 @@
 SHELL := /bin/sh
 
 
-clean:
+clean:	
+	sudo chmod 777 core/__pycache__/
+	sudo chmod 777 account/__pycache__/
+	sudo chmod 777 chbrasilprev/__pycache__/
+	sudo chmod 777 core/migrations/__pycache__/
+	sudo chmod 777 account/migrations/__pycache__/
+	
 	@rm -f .coverage 2> /dev/null
 	@rm -rf .cache 2> /dev/null
 	@find . -name "*.pyc" -delete
