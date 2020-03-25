@@ -4,7 +4,7 @@
 Você foi convidado a realizar um desafio de cadastro de produtos bem simples. Queremos
 avaliar sua qualidade de código, padrões REST e criatividade.
 
-[Projeto](contrib/desafiogpi.pdf)
+[Imagem do Projeto](contrib/desafiogpi.pdf)
 
 
 ## Tecnologias utilizadas 
@@ -92,18 +92,48 @@ auth/users/me/
 
 ## URL para usuario 
 
-Criando Usuario
-$ curl -X POST http://127.0.0.1:8088/auth/users/ --data 'email=email@email.com&password=alpine12'
+*Criando Usuario*   
+`$ curl -X POST http://127.0.0.1:8000/auth/users/ --data 'email=admin@example.com&password=admin42'`
 
-Obtenha o token 
-curl -X POST http://127.0.0.1:8088/auth/token/login/ --data 'email=email@email.com&password=alpine12'
+*Obtenha o token*    
+`curl -X POST http://127.0.0.1:8000/auth/token/login/ --data 'email=admin@example.com&password=admin42'`
 
-Perfil de Usuario 
-curl -LX GET http://127.0.0.1:8088/auth/users/me/ -H 'Authorization: Token b704c9fc3655635646356ac2950269f352ea1139'
+Perfil de Usuario    
+`curl -LX GET http://127.0.0.1:8000/auth/users/me/ -H 'Authorization: Token token_retornado_no_resposedo_login'`
 
-Faça o logout 
-curl -X POST http://127.0.0.1:8088/auth/token/logout/ -H 'Authorization: Token b704c9fc3655635646356ac2950269f352ea1139'
+*Faça o logout*    
+`curl -X POST http://127.0.0.1:8000/auth/token/logout/ -H 'Authorization: Token token_retornado_no_resposedo_login'`
 
 ## URL da API
 
-http://127.0.0.1:8000/pedido
+**GET**   
+
+*Pedido*   
+`curl -X GET http://127.0.0.1:8000/pedido -H 'Authorization: Token token_retornado_no_resposedo_login'`
+
+*Produto*   
+`curl -X GET http://127.0.0.1:8000/produto -H 'Authorization: Token token_retornado_no_resposedo_login'`
+
+*Categoria*   
+`curl -X GET http://127.0.0.1:8000/categoria -H 'Authorization: Token token_retornado_no_resposedo_login'`
+
+*Pedido Item*   
+`curl -X GET http://127.0.0.1:8000/pedidoitem -H 'Authorization: Token token_retornado_no_resposedo_login'`
+
+**POST** 
+
+*Pedido*   
+`curl -X POST http://127.0.0.1:8000/pedido -H 'Authorization: Token token_retornado_no_resposedo_login' \
+-data 'sessao=testando&status=0'`
+
+*Produto*   
+`curl -X POST http://127.0.0.1:8000/produto -H 'Authorization: Token token_retornado_no_resposedo_login' \
+-data 'categoria=1&quantidade=5221&produto=blablabla&descricao=balbalbla+2vezes&preco=0.00'`
+
+*Categoria*   
+`curl -X POST http://127.0.0.1:8000/categoria -H 'Authorization: Token token_retornado_no_resposedo_login' \
+-data 'categoria=categoria'`
+
+*Pedido Item*   
+`curl -X POST http://127.0.0.1:8000/pedidoitem -H 'Authorization: Token token_retornado_no_resposedo_login' \
+-data 'quantidade=10&valor=10.00&subtotal=100.00&pedido=1&produto=5'`
