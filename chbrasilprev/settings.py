@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=["*"], cast=Csv())
 
 # Application definition
 INSTALLED_APPS = [
@@ -40,12 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account', 
     'core',
+
+    'djoser',
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 if DEBUG:
     # apps installed only development 
     INSTALLED_APPS += [
-        'test_without_migrations'
+        'django_extensions',
     ]
 
 MIDDLEWARE = [
@@ -126,6 +131,22 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'account.User'
 LOGIN_REDIRECT_URL = '/'
+
+# rest_framework 
+REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    "PAGE_SIZE": 10,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+}
+
 
 USE_S3 = config('USE_S3', cast=bool, default=False)
 if USE_S3:
