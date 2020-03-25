@@ -1,1 +1,1 @@
-web: gunicorn chbrasilprev.wsgi:applicatio --log-file -
+web: gunicorn chbrasilprev.wsgi:application --log-file -
