@@ -21,9 +21,7 @@ lint:
 	@flake8 core
 
 test: clean lint
-	@black --check core
-	@isort --skip .venv -c
-	python -m pytest --cov=core
+	python -m pytest --cov=core --cov=account
 
 dump_data:
 	python manage.py load_data --all  
