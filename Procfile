@@ -1,0 +1,1 @@
+web: gunicorn chbrasilprev.wsgi --log-file -
