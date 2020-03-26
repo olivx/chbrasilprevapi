@@ -124,16 +124,36 @@ Perfil de Usuario
 
 *Pedido*   
 `curl -X POST http://127.0.0.1:8000/pedido -H 'Authorization: Token token_retornado_no_resposedo_login' \
--data 'sessao=testando&status=0'`
+-data 'sessao=testando&status=0'`   
+- *Filtros*    
+  sessao   
+  client_nome   
+  client_pk   
 
 *Produto*   
 `curl -X POST http://127.0.0.1:8000/produto -H 'Authorization: Token token_retornado_no_resposedo_login' \
--data 'categoria=1&quantidade=5221&produto=blablabla&descricao=balbalbla+2vezes&preco=0.00'`
+-data 'categoria=1&quantidade=5221&produto=blablabla&descricao=balbalbla+2vezes&preco=0.00'`   
+- *Filtros*   
+  produto   
+  categoria  
+  preco__gte  
+  preco__lte  
+  quantidade__gte   
+  quantidade__gte  
+ 
 
 *Categoria*   
 `curl -X POST http://127.0.0.1:8000/categoria -H 'Authorization: Token token_retornado_no_resposedo_login' \
--data 'categoria=categoria'`
+-data 'categoria=categoria'`   
+- *Filtros*    
+  categoria  
 
 *Pedido Item*   
 `curl -X POST http://127.0.0.1:8000/pedidoitem -H 'Authorization: Token token_retornado_no_resposedo_login' \
--data 'quantidade=10&valor=10.00&subtotal=100.00&pedido=1&produto=5'`
+-data 'quantidade=10&valor=10.00&subtotal=100.00&pedido=1&produto=5'`   
+- *Filtros*   
+  pedido   
+  produto   
+  categoria  
+  quantidade__gte  
+  quantidade__lte  
